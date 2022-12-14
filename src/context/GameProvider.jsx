@@ -9,11 +9,11 @@ const GameProvider = ({ children }) => {
 	const [showToast, setShowToast] = useState(false);
 	const [winName, setWinName] = useState('');
 	const [playerOne, setPlayerOne] = useState({
-		name: '',
+		name: 'Juan',
 		cards: [],
 	});
 	const [playerTwo, setPlayerTwo] = useState({
-		name: '',
+		name: 'Camilo',
 		cards: [],
 	});
 
@@ -43,7 +43,10 @@ const GameProvider = ({ children }) => {
 	};
 
 	const deckFull = cards => {
-		if (cards[0].cant == 4 && cards[1].cant == 3 && cards[2].cant == 3) {
+		console.log(cards[0]);
+		console.log(cards[1]);
+		console.log(cards[2]);
+		if (cards[0].cant === 4 && cards[1].cant === 3 && cards[2].cant === 3) {
 			return true;
 		} else {
 			return false;
@@ -51,7 +54,9 @@ const GameProvider = ({ children }) => {
 	};
 
 	const requestCards = () => {
+		console.log('Jugador 1');
 		const deckFullPlayerOne = deckFull(playerOne.cards);
+		console.log('Jugador 2');
 		const deckFullPlayerTwo = deckFull(playerTwo.cards);
 
 		if (deckFullPlayerOne && deckFullPlayerTwo) {

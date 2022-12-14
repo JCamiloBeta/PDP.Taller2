@@ -15,7 +15,7 @@ const Header = () => {
 					Deck Of Cards Game
 					<div>
 						<span className='text-align-left'>
-							id: {idGame} | cartas disponibles: {cantCards}
+							id: {idGame} | Available decks: {cantCards}
 						</span>
 					</div>
 				</Navbar.Brand>
