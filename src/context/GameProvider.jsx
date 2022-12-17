@@ -17,7 +17,7 @@ const GameProvider = ({ children }) => {
 		cards: [],
 	});
 
-	const [cantidadOcurrenciaOne, setOcurrenciaOne] = useState([]);
+	// const [cantidadOcurrenciaOne, setOcurrenciaOne] = useState([]);
 
 	const playGame = async () => {
 		const res = await DeckOfCardsAPI.getIdGame();
