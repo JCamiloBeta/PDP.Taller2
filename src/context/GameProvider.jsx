@@ -9,11 +9,11 @@ const GameProvider = ({ children }) => {
 	const [showToast, setShowToast] = useState(false);
 	const [winName, setWinName] = useState('');
 	const [playerOne, setPlayerOne] = useState({
-		name: '',
+		name: 'Camilo Betancur',
 		cards: [],
 	});
 	const [playerTwo, setPlayerTwo] = useState({
-		name: '',
+		name: 'Karen Fonseca',
 		cards: [],
 	});
 
