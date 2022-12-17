@@ -4,7 +4,7 @@ import useGame from '../hooks/useGame';
 const FormPlay = () => {
 	const { requestCards, cantCards, win } = useGame();
 	const handleClick = async e => {
-		if (cantCards == 0 || win) {
+		if (cantCards === 0 || win) {
 			e.target.disabled = true;
 			alert('Fin del juego');
 			console.log('0');

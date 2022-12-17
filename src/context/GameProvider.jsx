@@ -9,11 +9,11 @@ const GameProvider = ({ children }) => {
 	const [showToast, setShowToast] = useState(false);
 	const [winName, setWinName] = useState('');
 	const [playerOne, setPlayerOne] = useState({
-		name: 'Juan',
+		name: '',
 		cards: [],
 	});
 	const [playerTwo, setPlayerTwo] = useState({
-		name: 'Camilo',
+		name: '',
 		cards: [],
 	});
 
@@ -25,7 +25,6 @@ const GameProvider = ({ children }) => {
 		setCantCards(res.remaining);
 	};
 
-	/** cuando se logea */
 	useEffect(() => {
 		if (idGame != null) {
 			DeckCardsPlayerOne();
@@ -89,10 +88,7 @@ const GameProvider = ({ children }) => {
 		
 	}
 	const deckFull = cards => {
-		console.log(cards[0]);
-		console.log(cards[1]);
-		console.log(cards[2]);
-		if (cards[0].cant === 4 && cards[1].cant === 3 && cards[2].cant === 3) {
+		if (cards[0].cant == 4 && cards[1].cant == 3 && cards[2].cant == 3) {
 			return true;
 		} else {
 			return false;
@@ -100,9 +96,7 @@ const GameProvider = ({ children }) => {
 	};
 
 	const requestCards = () => {
-		console.log('Jugador 1');
 		const deckFullPlayerOne = deckFull(playerOne.cards);
-		console.log('Jugador 2');
 		const deckFullPlayerTwo = deckFull(playerTwo.cards);
 
 		if (deckFullPlayerOne && deckFullPlayerTwo) {
@@ -121,7 +115,6 @@ const GameProvider = ({ children }) => {
 
 	const getCards = async () => {
 		const data = await DeckOfCardsAPI.getCards(idGame);
-		// console.log(data);
 		setCantCards(data.remaining);
 		recuento(playerOne.cards, 1, data.cards[0]);
 		recuento(playerTwo.cards, 2, data.cards[1]);
@@ -195,7 +188,6 @@ const GameProvider = ({ children }) => {
 		} else {
 			cardDelete = filtro.pop();
 		}
-		// console.log(cardDelete);
 
 		cardsPlayer.forEach(card => {
 			if (checkDelete && card.value == cardDelete.value) {
@@ -207,7 +199,6 @@ const GameProvider = ({ children }) => {
 		newDeck.push(newCard);
 
 		if (player === 1) {
-			// console.log(newDeck);
 			setPlayerOne({ ...playerOne, cards: newDeck });
 		} else {
 			setPlayerTwo({ ...playerTwo, cards: newDeck });
