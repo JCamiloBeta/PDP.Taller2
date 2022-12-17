@@ -3,7 +3,11 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import useGame from '../hooks/useGame';
 const ListCards = () => {
-	const { playerOne, playerTwo } = useGame();
+	const { playerOne, playerTwo, ordenarPlayerOne, ordenarPlayerTwo, ganador } = useGame();
+	ordenarPlayerOne();
+	ordenarPlayerTwo();
+	ganador(playerOne.cards);
+	ganador(playerTwo.cards);
 	return (
 		<Container>
 			<Row>

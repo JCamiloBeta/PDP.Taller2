@@ -17,6 +17,8 @@ const GameProvider = ({ children }) => {
 		cards: [],
 	});
 
+	const [cantidadOcurrenciaOne, setOcurrenciaOne] = useState([]);
+
 	const playGame = async () => {
 		const res = await DeckOfCardsAPI.getIdGame();
 		setIdGame(res.deck_id);
@@ -42,6 +44,50 @@ const GameProvider = ({ children }) => {
 		setPlayerTwo({ ...playerTwo, cards: data.cards });
 	};
 
+	let aux, auxWord;
+	const ordenarPlayerOne = () => {
+		for (let j = 0; j < playerOne.cards.length; j++) {
+			for (let index = 0; index < playerOne.cards.length-1-j; index++) {
+				aux = [];
+				if (playerOne.cards[index].value === 'ACE' || playerOne.cards[index].value === 'JACK' || playerOne.cards[index].value === 'QUEEN' || playerOne.cards[index].value === 'KING') {
+					auxWord = 10;
+					if(auxWord > playerOne.cards[index+1].value){
+						aux = playerOne.cards[index];
+						playerOne.cards[index] = playerOne.cards[index+1];
+						playerOne.cards[index+1] = aux;
+					}
+				} else {
+					if(playerOne.cards[index].value > playerOne.cards[index+1].value){
+						aux = playerOne.cards[index];
+						playerOne.cards[index] = playerOne.cards[index+1];
+						playerOne.cards[index+1] = aux;
+					}
+				}
+			}
+		}		
+	}
+	const ordenarPlayerTwo = () => {
+		for (let j = 0; j < playerTwo.cards.length; j++) {
+			for (let index = 0; index < playerTwo.cards.length-1-j; index++) {
+				aux = [];
+				if (playerTwo.cards[index].value === 'ACE' || playerTwo.cards[index].value === 'JACK' || playerTwo.cards[index].value === 'QUEEN' || playerTwo.cards[index].value === 'KING') {
+					auxWord = 10;
+					if(auxWord > playerTwo.cards[index+1].value){
+						aux = playerTwo.cards[index];
+						playerTwo.cards[index] = playerTwo.cards[index+1];
+						playerTwo.cards[index+1] = aux;
+					}
+				} else {
+					if(playerTwo.cards[index].value > playerTwo.cards[index+1].value){
+						aux = playerTwo.cards[index];
+						playerTwo.cards[index] = playerTwo.cards[index+1];
+						playerTwo.cards[index+1] = aux;
+					}
+				}
+			}
+		}
+		
+	}
 	const deckFull = cards => {
 		console.log(cards[0]);
 		console.log(cards[1]);
@@ -80,7 +126,32 @@ const GameProvider = ({ children }) => {
 		recuento(playerOne.cards, 1, data.cards[0]);
 		recuento(playerTwo.cards, 2, data.cards[1]);
 	};
-
+	let ternas, cuartas, cartas, contador, bandera;
+	const ganador = (cardsPlayer) => {
+		ternas = [];
+		cuartas = [];
+		cartas = [];
+		for (let index = 0; index < cardsPlayer.length; index++) {
+			debugger;
+			bandera = false;
+			contador = 1;
+			for (let j = 0; j < cardsPlayer.length-1; j++) {
+				if (cardsPlayer[index].value === cardsPlayer[j].value && cardsPlayer[index].suit !== cardsPlayer[j].suit)
+					contador = contador + 1;
+			}
+			cartas.forEach( (valor) => {	
+				if(valor.name === cardsPlayer[index].value)
+					bandera = true;
+			});
+			if (!bandera) {
+				cartas.push({
+					name: cardsPlayer[index].value,
+					value: contador
+				});
+			}
+		}
+		console.log(cartas);
+	};
 	let res, filtro, nCard, cardDelete, newDeck, checkDelete;
 	const recuento = (cardsPlayer, player, newCard) => {
 		res = [];
@@ -154,6 +225,9 @@ const GameProvider = ({ children }) => {
 				setPlayerOne,
 				playerTwo,
 				setPlayerTwo,
+				ordenarPlayerOne,
+				ordenarPlayerTwo,
+				ganador,
 				showToast,
 				setShowToast,
 				winName,
